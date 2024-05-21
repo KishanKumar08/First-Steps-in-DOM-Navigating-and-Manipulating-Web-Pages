@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM-1</title>
+    <style>
+      #main-cont {
+        display: flex;
+        justify-content: space-evenly;
+      }
+      #main {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        /* margin: 0 auto; */
+      }
+      #main > div {
+        border: 1px solid black;
+        border-radius: 5%;
+        padding: 15px 20px;
+        background-color: rgb(154, 255, 255);
+        background-image: linear-gradient(180deg, #a9c9ff 0%, #ffbbec 100%);
+      }
+
+      form {
+        border: 1px solid red;
+        background-image: linear-gradient(0deg, #d9afd9 0%, #97d9e1 100%);
+        padding: 30px;
+      }
+      #header {
+        font-size: 26px;
+      }
+      form > button {
+        padding: 5px 15px;
+        background-color: black;
+        color: white;
+        margin-top: 10px;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main-cont">
+      <div id="main"></div>
+      <div>
+        <form>
+          <label for="header" id="header">Create Card</label><br /><br />
+          <label for="name">Name:-</label><br /><br />
+          <input
+            type="text"
+            id="Name"
+            name="Name"
+            placeholder="Enter your name"
+          /><br /><br />
+          <label for="name">Username:-</label><br /><br />
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter your username"
+          /><br /><br />
+          <label for="name">Email:-</label><br /><br />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter Your Email"
+          /><br /><br />
+          <button type="submit" id="submitbtn">Submit</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  var user = [
+    {
+      id: 1,
+      name: "Leanne Graham",
+      username: "Bret",
+      email: "Sincere@april.biz",
+    },
+    {
+      id: 2,
+      name: "Ervin Howell",
+      username: "Antonette",
+      email: "Shanna@melissa.tv",
+    },
+    {
+      id: 3,
+      name: "Clementine Bauch",
+      username: "Samantha",
+      email: "Nathan@yesenia.net",
+    },
+    {
+      id: 4,
+      name: "Patricia Lebsack",
+      username: "Karianne",
+      email: "Julianne.OConner@kory.org",
+    },
+    {
+      id: 5,
+      name: "Chelsey Dietrich",
+      username: "Kamren",
+      email: "Lucio_Hettinger@annie.ca",
+    },
+    {
+      id: 6,
+      name: "Mrs. Dennis Schulist",
+      username: "Leopoldo_Corkery",
+      email: "Karley_Dach@jasper.info",
+    },
+    {
+      id: 7,
+      name: "Kurtis Weissnat",
+      username: "Elwyn.Skiles",
+      email: "Telly.Hoeger@billy.biz",
+    },
+    {
+      id: 8,
+      name: "Nicholas Runolfsdottir V",
+      username: "Maxime_Nienow",
+      email: "Sherwood@rosamond.me",
+    },
+    {
+      id: 9,
+      name: "Glenna Reichert",
+      username: "Delphine",
+      email: "Chaim_McDermott@dana.io",
+    },
+    {
+      id: 10,
+      name: "Clementina DuBuque",
+      username: "Moriah.Stanton",
+      email: "Rey.Padberg@karina.biz",
+    },
+  ];
+
+  mainContainer = document.getElementById("main");
+
+  function createcard(userdetail) {
+    const card = document.createElement("div");
+    card.innerHTML = `
+            <p> Name:- ${userdetail.name}</p>
+            <p> Username:- ${userdetail.username}</p>
+            <p> Email:- ${userdetail.email}</p>
+        `;
+
+    mainContainer.append(card);
+  }
+  function displaycard() {
+    user.forEach((userdetail) => {
+      createcard(userdetail);
+    });
+  }
+
+  mainContainer.addEventListener("DOMcontentloaded", displaycard());
+
+  let submitBtn = document.getElementById("submitbtn");
+  submitBtn.addEventListener("click", function (event) {
+    event.preventDefault(); // page reload nhi hoga
+
+    const name = document.getElementById("Name");
+    const username = document.getElementById("username");
+    const email = document.getElementById("email");
+
+    const newuser = {
+      name: name.value,
+      username: username.value,
+      email: email.value,
+    };
+    createcard(newuser);
+
+    name.value = "";
+    username.value = "";
+    email.value = "";
+  });
+</script>
